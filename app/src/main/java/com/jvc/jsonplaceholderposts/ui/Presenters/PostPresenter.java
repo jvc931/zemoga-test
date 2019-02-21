@@ -1,5 +1,7 @@
 package com.jvc.jsonplaceholderposts.ui.Presenters;
 
+import com.jvc.jsonplaceholderposts.data.interactors.FetchCommentsFromServiceInteractor;
+import com.jvc.jsonplaceholderposts.data.interactors.FetchPostsFromServiceInteractor;
 import com.jvc.jsonplaceholderposts.ui.fragments.PostFragment;
 
 import javax.inject.Inject;
@@ -12,8 +14,20 @@ import javax.inject.Singleton;
 @Singleton
 public class PostPresenter extends BasePresenter<PostFragment> {
 
-    @Inject
-    public PostPresenter() {
+    private FetchPostsFromServiceInteractor postsInteractor;
+    private FetchCommentsFromServiceInteractor commentsInteractor;
 
+    @Inject
+    public PostPresenter(FetchPostsFromServiceInteractor postsInteractor, FetchCommentsFromServiceInteractor commentsInteractor) {
+        this.postsInteractor = postsInteractor;
+        this.commentsInteractor = commentsInteractor;
+    }
+
+    public FetchPostsFromServiceInteractor getPostsInteractor() {
+        return postsInteractor;
+    }
+
+    public FetchCommentsFromServiceInteractor getCommentsInteractor(){
+        return commentsInteractor;
     }
 }
