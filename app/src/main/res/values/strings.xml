@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">JsonPlaceHolder Posts</string>
+    <string name="post_activity_title">Post</string>
+    <string name="tab_1_title">All</string>
+    <string name="tab_2_title">Favorites</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
