@@ -2,22 +2,27 @@ package com.jvc.jsonplaceholderposts.ui.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.jvc.jsonplaceholderposts.BaseApplication;
 import com.jvc.jsonplaceholderposts.R;
-import com.jvc.jsonplaceholderposts.data.model.Comment;
 import com.jvc.jsonplaceholderposts.data.model.Post;
-import com.jvc.jsonplaceholderposts.ui.BaseView;
 import com.jvc.jsonplaceholderposts.ui.Presenters.PostPresenter;
+import com.jvc.jsonplaceholderposts.ui.adapters.PostListAdapter;
+import com.jvc.jsonplaceholderposts.ui.decorators.Decoration;
 import com.jvc.jsonplaceholderposts.ui.interfaces.PostViewInterface;
 
-import java.util.List;
-
 import javax.inject.Inject;
+
+import io.realm.RealmResults;
 
 /**
  * View that will show the list of the posts.
@@ -28,8 +33,8 @@ public class PostFragment extends Fragment implements PostViewInterface {
     @Inject
     PostPresenter presenter;
 
-    private List<Post> posts;
-    private List<Comment> comments;
+    private RecyclerView postListRecycler;
+    private PostListAdapter postListAdapter;
 
     /**
      * New instance of the {@link PostFragment}.
@@ -75,21 +80,29 @@ public class PostFragment extends Fragment implements PostViewInterface {
         presenter.detachView();
     }
 
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        postListRecycler = view.findViewById(R.id.recyclerview_post_list);
+        postListRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        postListRecycler.setItemAnimator(new DefaultItemAnimator());
+        postListRecycler.addItemDecoration(new Decoration(view.getContext(), Decoration.VERTICAL_LIST));
+    }
+
     @Override
     public void setPostsFromService() {
-        presenter.getPostsInteractor().execute().observe(this, posts ->{
+        presenter.getInteractor().execute().observe(this, posts ->{
             if (posts != null){
-                this.posts = posts;
+                postListAdapter = new PostListAdapter(posts);
+                postListRecycler.setAdapter(postListAdapter);
             }
         });
     }
 
     @Override
-    public void setCommentsFromService() {
-        presenter.getCommentsInteractor().execute().observe(this, comments ->{
-            if (comments != null){
-                this.comments = comments;
-            }
-        });
+    public void setPostsFromDataBase(RealmResults<Post> posts) {
+        postListAdapter = new PostListAdapter(posts);
+        postListRecycler.setAdapter(postListAdapter);
     }
 }

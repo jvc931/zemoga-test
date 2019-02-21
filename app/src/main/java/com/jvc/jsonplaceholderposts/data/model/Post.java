@@ -13,6 +13,7 @@ public class Post extends RealmObject {
     private String title;
     private String body;
     private boolean favorite;
+    private boolean read;
 
     public int getId() {
         return id;
@@ -34,6 +35,10 @@ public class Post extends RealmObject {
         return favorite;
     }
 
+    public boolean isRead() {
+        return read;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -52,6 +57,10 @@ public class Post extends RealmObject {
 
     public void setFavorite(boolean favorite) {
         this.favorite = favorite;
+    }
+
+    public void setRead(boolean read) {
+        this.read = read;
     }
 }
 

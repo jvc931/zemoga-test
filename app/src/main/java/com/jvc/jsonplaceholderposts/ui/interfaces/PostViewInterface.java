@@ -1,6 +1,9 @@
 package com.jvc.jsonplaceholderposts.ui.interfaces;
 
+import com.jvc.jsonplaceholderposts.data.model.Post;
 import com.jvc.jsonplaceholderposts.ui.BaseView;
+
+import io.realm.RealmResults;
 
 /**
  * Created by Jonathan Vargas on 21/02/2019.
@@ -8,12 +11,13 @@ import com.jvc.jsonplaceholderposts.ui.BaseView;
 public interface PostViewInterface extends BaseView {
 
     /**
-     * Gets and saves on the database the post getting from the service.
+     * Sets and saves on the database the post getting from the service.
      */
     void setPostsFromService();
 
     /**
-     * Gets and saves on the database the comments getting from the service.
+     * Sets the post list with the database data.
+     * @param posts
      */
-    void setCommentsFromService();
+    void setPostsFromDataBase(RealmResults<Post> posts);
 }

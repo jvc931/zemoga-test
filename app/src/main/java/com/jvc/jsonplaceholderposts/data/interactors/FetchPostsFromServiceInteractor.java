@@ -12,6 +12,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,10 +23,12 @@ import retrofit2.Response;
 public class FetchPostsFromServiceInteractor {
 
     private JsonPlaceholderApi apiClient;
+    private Realm db;
 
     @Inject
-    public FetchPostsFromServiceInteractor(JsonPlaceholderApi apiClient){
+    public FetchPostsFromServiceInteractor(JsonPlaceholderApi apiClient, Realm db){
         this.apiClient = apiClient;
+        this.db = db;
     }
 
     /**
@@ -33,7 +36,6 @@ public class FetchPostsFromServiceInteractor {
      * @return List of posts.
      */
     public LiveData<List<Post>> execute(){
-        final Realm db = Realm.getDefaultInstance();
         Call<List<Post>> call = apiClient.getPosts();
         call.enqueue(new Callback<List<Post>>() {
             @Override
@@ -41,7 +43,6 @@ public class FetchPostsFromServiceInteractor {
                 db.beginTransaction();
                 db.copyToRealmOrUpdate(response.body());
                 db.commitTransaction();
-                db.close();
             }
 
             @Override

@@ -7,6 +7,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.realm.Realm;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -30,5 +31,11 @@ public class ApplicationModule {
                 addConverterFactory(GsonConverterFactory.create()).
                 build();
         return retrofit.create(JsonPlaceholderApi.class);
+    }
+
+    @Provides
+    @Singleton
+    Realm provideRealmDb(){
+        return Realm.getDefaultInstance();
     }
 }
