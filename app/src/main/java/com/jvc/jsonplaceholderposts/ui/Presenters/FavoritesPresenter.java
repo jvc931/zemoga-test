@@ -1,5 +1,6 @@
 package com.jvc.jsonplaceholderposts.ui.Presenters;
 
+import com.jvc.jsonplaceholderposts.data.interactors.FetchFavoritePostsInteractor;
 import com.jvc.jsonplaceholderposts.data.model.Post;
 import com.jvc.jsonplaceholderposts.ui.fragments.FavoritesFragment;
 
@@ -17,10 +18,12 @@ import io.realm.RealmResults;
 public class FavoritesPresenter extends BasePresenter<FavoritesFragment> {
 
     private Realm db;
+    private FetchFavoritePostsInteractor interactor;
 
     @Inject
-    public FavoritesPresenter(Realm db) {
+    public FavoritesPresenter(Realm db, FetchFavoritePostsInteractor interactor) {
         this.db = db;
+        this.interactor = interactor;
     }
 
     @Override
@@ -33,7 +36,6 @@ public class FavoritesPresenter extends BasePresenter<FavoritesFragment> {
      * Sets the favorite list of post to the view.
      */
     public void setFavoritePostList() {
-        RealmResults favoritePost = db.where(Post.class).equalTo("favorite", true).findAll();
-        view.setFavoritePostList(favoritePost);
+        view.setFavoritePostList(interactor.execute());
     }
 }

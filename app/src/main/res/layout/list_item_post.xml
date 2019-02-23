@@ -17,7 +17,7 @@
 
     <TextView
         android:id="@+id/textview_post_list_item_title"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/no_dimen"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/small_margin"
         android:layout_marginRight="@dimen/small_margin"

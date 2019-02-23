@@ -19,6 +19,10 @@ import com.jvc.jsonplaceholderposts.ui.Presenters.PostPresenter;
 import com.jvc.jsonplaceholderposts.ui.adapters.PostListAdapter;
 import com.jvc.jsonplaceholderposts.ui.decorators.Decoration;
 import com.jvc.jsonplaceholderposts.ui.interfaces.PostViewInterface;
+import com.jvc.jsonplaceholderposts.ui.interfaces.UserActionInterface;
+import com.jvc.jsonplaceholderposts.ui.interfaces.UserIteractionsInterface;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -28,13 +32,14 @@ import io.realm.RealmResults;
  * View that will show the list of the posts.
  * Created by Jonathan Vargas on 21/02/2019.
  */
-public class PostFragment extends Fragment implements PostViewInterface {
+public class PostFragment extends Fragment implements PostViewInterface, UserIteractionsInterface {
 
     @Inject
     PostPresenter presenter;
 
     private RecyclerView postListRecycler;
     private PostListAdapter postListAdapter;
+    private UserActionInterface userActionInterface;
 
     /**
      * New instance of the {@link PostFragment}.
@@ -61,6 +66,9 @@ public class PostFragment extends Fragment implements PostViewInterface {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        if (getActivity() instanceof UserActionInterface) {
+            userActionInterface = (UserActionInterface) getActivity();
+        }
     }
 
     @Override
@@ -92,17 +100,25 @@ public class PostFragment extends Fragment implements PostViewInterface {
 
     @Override
     public void setPostsFromService() {
-        presenter.getInteractor().execute().observe(this, posts ->{
+        presenter.getPostsFromServiceInteractor().execute().observe(this, posts ->{
             if (posts != null){
-                postListAdapter = new PostListAdapter(posts);
-                postListRecycler.setAdapter(postListAdapter);
+                setPostListAdapter(posts);
             }
         });
     }
 
     @Override
     public void setPostsFromDataBase(RealmResults<Post> posts) {
-        postListAdapter = new PostListAdapter(posts);
+        setPostListAdapter(posts);
+    }
+
+    @Override
+    public void userClick(int postId) {
+        userActionInterface.postSelected(postId);
+    }
+
+    private void setPostListAdapter(List<Post> posts){
+        postListAdapter = new PostListAdapter(posts, this);
         postListRecycler.setAdapter(postListAdapter);
     }
 }

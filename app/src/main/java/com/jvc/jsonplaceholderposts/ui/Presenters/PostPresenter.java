@@ -1,6 +1,7 @@
 package com.jvc.jsonplaceholderposts.ui.Presenters;
 
 import com.jvc.jsonplaceholderposts.data.interactors.FetchPostsFromServiceInteractor;
+import com.jvc.jsonplaceholderposts.data.interactors.FetchPostsInteractor;
 import com.jvc.jsonplaceholderposts.data.model.Post;
 import com.jvc.jsonplaceholderposts.ui.fragments.PostFragment;
 
@@ -17,17 +18,19 @@ import io.realm.RealmResults;
 @Singleton
 public class PostPresenter extends BasePresenter<PostFragment> {
 
-    private FetchPostsFromServiceInteractor interactor;
+    private FetchPostsFromServiceInteractor postsFromServiceInteractor;
+    private FetchPostsInteractor fetchPostsInteractor;
     private Realm db;
 
     @Inject
-    public PostPresenter(FetchPostsFromServiceInteractor interactor, Realm db) {
-        this.interactor = interactor;
+    public PostPresenter(FetchPostsFromServiceInteractor fetchPostsFromServiceInteractor, Realm db, FetchPostsInteractor fetchPostsInteractor) {
+        this.postsFromServiceInteractor = fetchPostsFromServiceInteractor;
+        this.fetchPostsInteractor = fetchPostsInteractor;
         this.db = db;
     }
 
-    public FetchPostsFromServiceInteractor getInteractor() {
-        return interactor;
+    public FetchPostsFromServiceInteractor getPostsFromServiceInteractor() {
+        return postsFromServiceInteractor;
     }
 
     @Override
@@ -37,7 +40,7 @@ public class PostPresenter extends BasePresenter<PostFragment> {
     }
 
     private void setPostList(){
-        RealmResults posts = db.where(Post.class).findAll();
+        RealmResults posts = fetchPostsInteractor.execute();
         if(posts.isEmpty()){
             view.setPostsFromService();
         } else {

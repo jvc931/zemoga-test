@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.PostDetailsActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/layout_post_details_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/small_margin"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_marginRight="@dimen/small_margin">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/layout_post_details_description"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/no_dimen"
+            app:layout_constraintHeight_percent=".35"
+            app:layout_constraintRight_toRightOf="@id/layout_post_details_content"
+            app:layout_constraintTop_toTopOf="@id/layout_post_details_content">
+
+            <TextView
+                android:id="@+id/textview_post_details_description_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/post_details_description_title"
+                android:textSize="@dimen/title_font_size"
+                android:textStyle="bold"
+                app:layout_constraintRight_toRightOf="@id/layout_post_details_description"
+                app:layout_constraintStart_toStartOf="@id/layout_post_details_description"
+                app:layout_constraintTop_toTopOf="@id/layout_post_details_description" />
+
+            <TextView
+                android:id="@+id/textview_post_details_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                app:layout_constraintBottom_toBottomOf="@id/layout_post_details_description"
+                app:layout_constraintTop_toBottomOf="@id/textview_post_details_description_title" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/layout_post_details_user_info"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/no_dimen"
+            app:layout_constraintHeight_percent=".35"
+            app:layout_constraintRight_toRightOf="@id/layout_post_details_content"
+            app:layout_constraintTop_toBottomOf="@id/layout_post_details_description">
+
+            <TextView
+                android:id="@+id/textview_post_details_user_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/post_details_user_title"
+                android:textSize="@dimen/title_font_size"
+                android:textStyle="bold"
+                app:layout_constraintRight_toRightOf="@id/layout_post_details_user_info"
+                app:layout_constraintStart_toStartOf="@id/layout_post_details_user_info"
+                app:layout_constraintTop_toTopOf="@id/layout_post_details_user_info" />
+
+            <TextView
+                android:id="@+id/textview_post_details_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                app:layout_constraintBottom_toTopOf="@+id/textview_post_details_user_username"
+                app:layout_constraintTop_toBottomOf="@+id/textview_post_details_user_title" />
+
+            <TextView
+                android:id="@+id/textview_post_details_user_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/textview_post_details_user_email"
+                app:layout_constraintTop_toBottomOf="@+id/textview_post_details_user_name" />
+
+            <TextView
+                android:id="@+id/textview_post_details_user_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/textview_post_details_user_phone"
+                app:layout_constraintTop_toBottomOf="@+id/textview_post_details_user_username" />
+
+            <TextView
+                android:id="@+id/textview_post_details_user_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/textview_post_details_user_website"
+                app:layout_constraintTop_toBottomOf="@+id/textview_post_details_user_email" />
+
+            <TextView
+                android:id="@+id/textview_post_details_user_website"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textview_post_details_user_phone" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/layout_post_details_comments"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/no_dimen"
+            app:layout_constraintHeight_percent=".3"
+            app:layout_constraintRight_toRightOf="@id/layout_post_details_content"
+            app:layout_constraintTop_toBottomOf="@id/layout_post_details_user_info">
+
+            <TextView
+                android:id="@+id/textview_post_details_comment_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/post_details_comments_title"
+                android:textSize="@dimen/title_font_size"
+                android:textStyle="bold"
+                android:background="#f2f2f2"
+                app:layout_constraintRight_toRightOf="@id/layout_post_details_comments"
+                app:layout_constraintStart_toStartOf="@id/layout_post_details_comments"
+                app:layout_constraintTop_toTopOf="@id/layout_post_details_comments" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_post_details_comment_list"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/no_dimen"
+                android:layout_marginTop="@dimen/medium_margin"
+                app:layout_constraintTop_toBottomOf="@id/textview_post_details_comment_title"
+                app:layout_constraintBottom_toBottomOf="@id/layout_post_details_comments"/>
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

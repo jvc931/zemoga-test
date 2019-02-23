@@ -21,6 +21,8 @@ import com.jvc.jsonplaceholderposts.ui.Presenters.FavoritesPresenter;
 import com.jvc.jsonplaceholderposts.ui.adapters.PostListAdapter;
 import com.jvc.jsonplaceholderposts.ui.decorators.Decoration;
 import com.jvc.jsonplaceholderposts.ui.interfaces.FavoritesViewInterface;
+import com.jvc.jsonplaceholderposts.ui.interfaces.UserActionInterface;
+import com.jvc.jsonplaceholderposts.ui.interfaces.UserIteractionsInterface;
 
 import javax.inject.Inject;
 
@@ -30,13 +32,14 @@ import io.realm.RealmResults;
  * View that will show the list of the post selected like favorites.
  * Created by Jonathan Vargas on 21/02/2019.
  */
-public class FavoritesFragment extends Fragment implements FavoritesViewInterface {
+public class FavoritesFragment extends Fragment implements FavoritesViewInterface, UserIteractionsInterface {
 
     @Inject
     FavoritesPresenter presenter;
 
     private RecyclerView favoritePostRecycler;
     private PostListAdapter postListAdapter;
+    private UserActionInterface userActionInterface;
 
 
     /**
@@ -77,6 +80,9 @@ public class FavoritesFragment extends Fragment implements FavoritesViewInterfac
     public void onResume() {
         super.onResume();
         presenter.attachView(this);
+        if (getActivity() instanceof UserActionInterface) {
+            userActionInterface = (UserActionInterface) getActivity();
+        }
     }
 
     @Override
@@ -96,7 +102,12 @@ public class FavoritesFragment extends Fragment implements FavoritesViewInterfac
 
     @Override
     public void setFavoritePostList(RealmResults<Post> posts) {
-        postListAdapter = new PostListAdapter(posts);
+        postListAdapter = new PostListAdapter(posts, this);
         favoritePostRecycler.setAdapter(postListAdapter);
+    }
+
+    @Override
+    public void userClick(int postId) {
+        userActionInterface.postSelected(postId);
     }
 }

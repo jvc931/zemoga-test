@@ -3,7 +3,16 @@
     <string name="post_activity_title">Post</string>
     <string name="tab_1_title">All</string>
     <string name="tab_2_title">Favorites</string>
+    <string name="menu_item_add_favorite">Add Favorite</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Post Details Screen Strings-->
+    <string name="title_activity_post_details">Post Details</string>
+    <string name="post_details_description_title">Description</string>
+    <string name="post_details_user_title">User</string>
+    <string name="post_details_comments_title">Comments</string>
+    <string name="post_details_user_name">Name: %s</string>
+    <string name="post_details_user_username">Username: %s</string>
+    <string name="post_details_user_phone">Phone: %s</string>
+    <string name="post_details_user_email">Email: %s</string>
+    <string name="post_details_user_website">Website: %s</string>
 </resources>

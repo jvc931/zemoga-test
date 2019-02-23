@@ -1,5 +1,6 @@
 package com.jvc.jsonplaceholderposts.ui.activities;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import com.jvc.jsonplaceholderposts.ui.BaseView;
 import com.jvc.jsonplaceholderposts.ui.Presenters.MainPostPresenter;
 import com.jvc.jsonplaceholderposts.ui.fragments.FavoritesFragment;
 import com.jvc.jsonplaceholderposts.ui.fragments.PostFragment;
+import com.jvc.jsonplaceholderposts.ui.interfaces.UserActionInterface;
 
 import javax.inject.Inject;
 
@@ -25,7 +27,7 @@ import javax.inject.Inject;
  * Main view that manages the transitions between views.
  * Created by Jonathan Vargas on 21/02/2019.
  */
-public class PostActivity extends AppCompatActivity implements BaseView {
+public class PostActivity extends AppCompatActivity implements BaseView, UserActionInterface {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -73,7 +75,25 @@ public class PostActivity extends AppCompatActivity implements BaseView {
 
             }
         });
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.attachView(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        presenter.detachView();
+    }
+
+    @Override
+    public void postSelected(int postId) {
+        Intent goToPostDetails = new Intent(this, PostDetailsActivity.class);
+        goToPostDetails.putExtra("postSelected", postId);
+        startActivity(goToPostDetails);
     }
 
     /**

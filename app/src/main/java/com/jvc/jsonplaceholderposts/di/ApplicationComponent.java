@@ -1,6 +1,7 @@
 package com.jvc.jsonplaceholderposts.di;
 
 import com.jvc.jsonplaceholderposts.ui.activities.PostActivity;
+import com.jvc.jsonplaceholderposts.ui.activities.PostDetailsActivity;
 import com.jvc.jsonplaceholderposts.ui.fragments.FavoritesFragment;
 import com.jvc.jsonplaceholderposts.ui.fragments.PostFragment;
 
@@ -36,5 +37,12 @@ public interface ApplicationComponent {
      * @param fragment {@link FavoritesFragment} instance.
      */
     void inject(FavoritesFragment fragment);
+
+    /**
+     * Inject method for the {@link PostDetailsActivity}.
+     *
+     * @param activity {@link PostDetailsActivity} instance.
+     */
+    void inject(PostDetailsActivity activity);
 
 }

@@ -2,6 +2,7 @@ package com.jvc.jsonplaceholderposts.data.service;
 
 import com.jvc.jsonplaceholderposts.data.model.Comment;
 import com.jvc.jsonplaceholderposts.data.model.Post;
+import com.jvc.jsonplaceholderposts.data.model.User;
 
 import java.util.List;
 
@@ -18,4 +19,7 @@ public interface JsonPlaceholderApi {
 
     @GET("comments")
     Call<List<Comment>> getComments();
+
+    @GET("users")
+    Call<List<User>> getUsers();
 }
