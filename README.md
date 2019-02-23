@@ -4,10 +4,10 @@ This application shows a list of post that are getting from the JsonPlaceholder 
 
 When the user tap on one post the application will show the description of the post, the user that made the post and the comments associeted with this post.
 
-#How to run
+# How to run
 This project is public, you can clone using the git command and open the project using Android Studio, after the sync you can run the project on your device or use an emulator.
 
-#Libs 
+# Libs 
 This project use external libraries, next are the list of this libraries and why are using:
 
 * Retrofit: this library help with the services calls, its helps to have a good performance on the service calls and automatically parse the json response to java objects.
