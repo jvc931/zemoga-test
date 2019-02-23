@@ -110,4 +110,8 @@ public class FavoritesFragment extends Fragment implements FavoritesViewInterfac
     public void userClick(int postId) {
         userActionInterface.postSelected(postId);
     }
+
+    public void updateUi(){
+        postListAdapter.notifyDataSetChanged();
+    }
 }

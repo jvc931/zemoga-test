@@ -1,5 +1,6 @@
 package com.jvc.jsonplaceholderposts.ui.Presenters;
 
+import com.jvc.jsonplaceholderposts.data.interactors.DeletePostInteractor;
 import com.jvc.jsonplaceholderposts.data.interactors.FetchCommentsFromServiceInteractor;
 import com.jvc.jsonplaceholderposts.data.interactors.FetchUsersFromServiceInteractor;
 import com.jvc.jsonplaceholderposts.data.model.User;
@@ -19,13 +20,15 @@ public class MainPostPresenter extends BasePresenter<PostActivity> {
 
     private FetchCommentsFromServiceInteractor commentsFromServiceInteractor;
     private FetchUsersFromServiceInteractor usersFromServiceInteractor;
-    private Realm db;
+    private DeletePostInteractor deletePostInteractor;
 
     @Inject
-    public MainPostPresenter(FetchUsersFromServiceInteractor usersFromServiceInteractor, FetchCommentsFromServiceInteractor commentsFromServiceInteractor, Realm db) {
+    public MainPostPresenter(FetchUsersFromServiceInteractor usersFromServiceInteractor,
+                             FetchCommentsFromServiceInteractor commentsFromServiceInteractor,
+                             DeletePostInteractor deletePostInteractor) {
         this.commentsFromServiceInteractor = commentsFromServiceInteractor;
         this.usersFromServiceInteractor = usersFromServiceInteractor;
-        this.db = db;
+        this.deletePostInteractor = deletePostInteractor;
     }
 
     @Override
@@ -35,15 +38,15 @@ public class MainPostPresenter extends BasePresenter<PostActivity> {
         saveComments();
     }
 
-    private void saveUsers(){
-        if (db.where(User.class).findAll().isEmpty()){
-            usersFromServiceInteractor.execute();
-        }
+    private void saveUsers() {
+        usersFromServiceInteractor.execute();
     }
 
-    private void saveComments(){
-        if (db.where(User.class).findAll().isEmpty()){
-            commentsFromServiceInteractor.execute();
-        }
+    private void saveComments() {
+        commentsFromServiceInteractor.execute();
+    }
+
+    public void deleteAllPost() {
+        deletePostInteractor.execute();
     }
 }

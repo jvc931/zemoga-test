@@ -1,11 +1,6 @@
 package com.jvc.jsonplaceholderposts.data.interactors;
 
-import android.arch.lifecycle.LiveData;
-
-import com.jvc.jsonplaceholderposts.data.db.LiveRealmResults;
 import com.jvc.jsonplaceholderposts.data.model.Post;
-
-import java.util.List;
 
 import javax.inject.Inject;
 

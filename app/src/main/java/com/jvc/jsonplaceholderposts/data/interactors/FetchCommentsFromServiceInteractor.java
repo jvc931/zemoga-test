@@ -1,11 +1,6 @@
 package com.jvc.jsonplaceholderposts.data.interactors;
 
-import android.arch.lifecycle.LiveData;
-import android.util.Log;
-
-import com.jvc.jsonplaceholderposts.data.db.LiveRealmResults;
 import com.jvc.jsonplaceholderposts.data.model.Comment;
-import com.jvc.jsonplaceholderposts.data.model.Post;
 import com.jvc.jsonplaceholderposts.data.service.JsonPlaceholderApi;
 
 import java.util.List;
@@ -23,33 +18,36 @@ import retrofit2.Response;
 public class FetchCommentsFromServiceInteractor {
 
     private JsonPlaceholderApi apiClient;
+    private Realm db;
 
     @Inject
-    public FetchCommentsFromServiceInteractor(JsonPlaceholderApi apiClient){
+    public FetchCommentsFromServiceInteractor(JsonPlaceholderApi apiClient, Realm db) {
         this.apiClient = apiClient;
+        this.db = db;
     }
 
     /**
      * Gets and saves on the database the comments getting from the service.
+     *
      * @return List of comments.
      */
-    public LiveData<List<Comment>> execute(){
-        final Realm db = Realm.getDefaultInstance();
-        Call<List<Comment>> call = apiClient.getComments();
-        call.enqueue(new Callback<List<Comment>>() {
-            @Override
-            public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
-                db.beginTransaction();
-                db.copyToRealmOrUpdate(response.body());
-                db.commitTransaction();
-                db.close();
-            }
+    public void execute() {
+        if (db.where(Comment.class).count() == 0) {
+            Call<List<Comment>> call = apiClient.getComments();
+            call.enqueue(new Callback<List<Comment>>() {
+                @Override
+                public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
+                    db.beginTransaction();
+                    db.copyToRealmOrUpdate(response.body());
+                    db.commitTransaction();
+                    db.close();
+                }
 
-            @Override
-            public void onFailure(Call<List<Comment>> call, Throwable t) {
+                @Override
+                public void onFailure(Call<List<Comment>> call, Throwable t) {
 
-            }
-        });
-        return new LiveRealmResults<>(db.where(Comment.class).findAll());
+                }
+            });
+        }
     }
 }

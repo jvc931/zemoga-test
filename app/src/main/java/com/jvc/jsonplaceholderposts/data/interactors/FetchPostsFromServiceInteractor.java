@@ -1,7 +1,6 @@
 package com.jvc.jsonplaceholderposts.data.interactors;
 
 import android.arch.lifecycle.LiveData;
-import android.util.Log;
 
 import com.jvc.jsonplaceholderposts.data.db.LiveRealmResults;
 import com.jvc.jsonplaceholderposts.data.model.Post;
@@ -12,7 +11,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

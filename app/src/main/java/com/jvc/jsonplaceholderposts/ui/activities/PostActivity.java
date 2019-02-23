@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.View;
 
 import com.jvc.jsonplaceholderposts.BaseApplication;
 import com.jvc.jsonplaceholderposts.R;
@@ -45,6 +44,8 @@ public class PostActivity extends AppCompatActivity implements BaseView, UserAct
     private ViewPager viewPager;
 
     private static final int NUMBER_OF_TABS = 2;
+    private FavoritesFragment favoritesFragment;
+    private PostFragment postFragment;
 
     @Inject
     MainPostPresenter presenter;
@@ -69,11 +70,10 @@ public class PostActivity extends AppCompatActivity implements BaseView, UserAct
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
 
         FloatingActionButton deletePostsButton =  findViewById(R.id.floating_button_delete_posts);
-        deletePostsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
+        deletePostsButton.setOnClickListener(view -> {
+            presenter.deleteAllPost();
+            postFragment.updateUi();
+            favoritesFragment.updateUi();
         });
     }
 
@@ -110,10 +110,12 @@ public class PostActivity extends AppCompatActivity implements BaseView, UserAct
         public Fragment getItem(int position) {
            switch (position){
                case 1:
-                   return FavoritesFragment.newInstance();
+                   favoritesFragment = FavoritesFragment.newInstance();
+                   return favoritesFragment;
                case 0:
                default:
-                   return PostFragment.newInstance();
+                   postFragment = PostFragment.newInstance();
+                   return postFragment;
            }
         }
 

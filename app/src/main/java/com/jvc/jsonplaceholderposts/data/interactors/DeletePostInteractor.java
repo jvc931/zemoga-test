@@ -9,19 +9,18 @@ import io.realm.Realm;
 /**
  * Created by Jonathan Vargas on 23/02/2019.
  */
-public class SetPostReadInteractor {
+public class DeletePostInteractor {
 
     private Realm db;
 
     @Inject
-    public SetPostReadInteractor(Realm db) {
+    public DeletePostInteractor(Realm db) {
         this.db = db;
     }
 
-    public void execute(Post post) {
+    public void execute() {
         db.beginTransaction();
-        post.setRead(true);
-        db.copyToRealmOrUpdate(post);
+        db.delete(Post.class);
         db.commitTransaction();
     }
 }

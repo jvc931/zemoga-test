@@ -14,11 +14,11 @@ public class SetPostAsFavoriteInteractor {
     private Realm db;
 
     @Inject
-    public SetPostAsFavoriteInteractor(Realm db){
+    public SetPostAsFavoriteInteractor(Realm db) {
         this.db = db;
     }
 
-    public void execute(Post post){
+    public void execute(Post post) {
         db.beginTransaction();
         post.setFavorite(true);
         db.copyToRealmOrUpdate(post);

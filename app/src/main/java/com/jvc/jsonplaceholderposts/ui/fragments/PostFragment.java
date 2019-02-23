@@ -121,4 +121,8 @@ public class PostFragment extends Fragment implements PostViewInterface, UserIte
         postListAdapter = new PostListAdapter(posts, this);
         postListRecycler.setAdapter(postListAdapter);
     }
+
+    public void updateUi(){
+        postListAdapter.notifyDataSetChanged();
+    }
 }

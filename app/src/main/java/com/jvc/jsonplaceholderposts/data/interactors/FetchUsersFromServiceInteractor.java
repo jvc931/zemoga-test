@@ -1,9 +1,5 @@
 package com.jvc.jsonplaceholderposts.data.interactors;
 
-import android.arch.lifecycle.LiveData;
-
-import com.jvc.jsonplaceholderposts.data.db.LiveRealmResults;
-import com.jvc.jsonplaceholderposts.data.model.Post;
 import com.jvc.jsonplaceholderposts.data.model.User;
 import com.jvc.jsonplaceholderposts.data.service.JsonPlaceholderApi;
 
@@ -25,30 +21,32 @@ public class FetchUsersFromServiceInteractor {
     private Realm db;
 
     @Inject
-    public FetchUsersFromServiceInteractor(JsonPlaceholderApi apiClient, Realm db){
+    public FetchUsersFromServiceInteractor(JsonPlaceholderApi apiClient, Realm db) {
         this.apiClient = apiClient;
         this.db = db;
     }
 
     /**
      * Gets and saves on the database the post getting from the service.
+     *
      * @return List of posts.
      */
-    public LiveData<List<User>> execute(){
-        Call<List<User>> call = apiClient.getUsers();
-        call.enqueue(new Callback<List<User>>() {
-            @Override
-            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                db.beginTransaction();
-                db.copyToRealmOrUpdate(response.body());
-                db.commitTransaction();
-            }
+    public void execute() {
+        if (db.where(User.class).count() == 0) {
+            Call<List<User>> call = apiClient.getUsers();
+            call.enqueue(new Callback<List<User>>() {
+                @Override
+                public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                    db.beginTransaction();
+                    db.copyToRealmOrUpdate(response.body());
+                    db.commitTransaction();
+                }
 
-            @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
+                @Override
+                public void onFailure(Call<List<User>> call, Throwable t) {
 
-            }
-        });
-        return new LiveRealmResults<>(db.where(User.class).findAll());
+                }
+            });
+        }
     }
 }
