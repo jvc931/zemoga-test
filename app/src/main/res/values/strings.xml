@@ -4,6 +4,8 @@
     <string name="tab_1_title">All</string>
     <string name="tab_2_title">Favorites</string>
     <string name="menu_item_add_favorite">Add Favorite</string>
+    <string name="menu_item_reload_data">Reload</string>
+
 
     <!-- Post Details Screen Strings-->
     <string name="title_activity_post_details">Post Details</string>

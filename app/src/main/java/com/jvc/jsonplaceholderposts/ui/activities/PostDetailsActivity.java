@@ -79,7 +79,7 @@ public class PostDetailsActivity extends AppCompatActivity implements PostDetail
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_post_details, menu);
         return true;
     }
 
@@ -87,7 +87,7 @@ public class PostDetailsActivity extends AppCompatActivity implements PostDetail
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.add_favorite) {
+        if (id == R.id.menu_item_add_favorite) {
             presenter.updatePostAsFavorite();
             return true;
         }

@@ -11,6 +11,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.jvc.jsonplaceholderposts.BaseApplication;
 import com.jvc.jsonplaceholderposts.R;
@@ -76,6 +78,29 @@ public class PostActivity extends AppCompatActivity implements BaseView, UserAct
             favoritesFragment.updateUi();
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main_post, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.menu_item_reload_post) {
+            presenter.getFetchPostsFromServiceInteractor().execute().observe(this, posts -> {
+                if (posts != null) {
+                    postFragment.updateUi();
+                }
+            });
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     protected void onResume() {
