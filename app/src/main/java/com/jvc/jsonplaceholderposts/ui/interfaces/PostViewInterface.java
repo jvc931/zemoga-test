@@ -19,6 +19,7 @@ public interface PostViewInterface extends BaseView {
 
     /**
      * Sets the post list with the database data.
+     *
      * @param posts
      */
     void setPostsFromDataBase(RealmResults<Post> posts);

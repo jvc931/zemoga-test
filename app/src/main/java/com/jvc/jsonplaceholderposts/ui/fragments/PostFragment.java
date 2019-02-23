@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.jvc.jsonplaceholderposts.data.model.Post;
 import com.jvc.jsonplaceholderposts.ui.Presenters.PostPresenter;
 import com.jvc.jsonplaceholderposts.ui.adapters.PostListAdapter;
 import com.jvc.jsonplaceholderposts.ui.decorators.Decoration;
+import com.jvc.jsonplaceholderposts.ui.decorators.SwipeToDeleteCallback;
 import com.jvc.jsonplaceholderposts.ui.interfaces.PostViewInterface;
 import com.jvc.jsonplaceholderposts.ui.interfaces.UserActionInterface;
 import com.jvc.jsonplaceholderposts.ui.interfaces.UserIteractionsInterface;
@@ -59,7 +61,6 @@ public class PostFragment extends Fragment implements PostViewInterface, UserIte
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ((BaseApplication) getActivity().getApplication()).getApplicationComponent().inject(this);
-        ;
         return inflater.inflate(R.layout.fragment_post, container, false);
     }
 
@@ -118,9 +119,17 @@ public class PostFragment extends Fragment implements PostViewInterface, UserIte
         userActionInterface.postSelected(postId);
     }
 
+    @Override
+    public void userDeleteSwipe(int position) {
+        presenter.deletePostById(postListAdapter.getPostIdSelected(position));
+        postListAdapter.notifyItemRemoved(position);
+    }
+
     private void setPostListAdapter(List<Post> posts) {
         postListAdapter = new PostListAdapter(posts, this);
         postListRecycler.setAdapter(postListAdapter);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(postListAdapter));
+        itemTouchHelper.attachToRecyclerView(postListRecycler);
     }
 
     public void updateUi() {

@@ -1,5 +1,6 @@
 package com.jvc.jsonplaceholderposts.ui.Presenters;
 
+import com.jvc.jsonplaceholderposts.data.interactors.DeletePostByIdInteractor;
 import com.jvc.jsonplaceholderposts.data.interactors.FetchPostsFromServiceInteractor;
 import com.jvc.jsonplaceholderposts.data.interactors.FetchPostsInteractor;
 import com.jvc.jsonplaceholderposts.ui.fragments.PostFragment;
@@ -7,7 +8,6 @@ import com.jvc.jsonplaceholderposts.ui.fragments.PostFragment;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import io.realm.Realm;
 import io.realm.RealmResults;
 
 /**
@@ -19,13 +19,15 @@ public class PostPresenter extends BasePresenter<PostFragment> {
 
     private FetchPostsFromServiceInteractor postsFromServiceInteractor;
     private FetchPostsInteractor fetchPostsInteractor;
-    private Realm db;
+    private DeletePostByIdInteractor deletePostByIdInteractor;
 
     @Inject
-    public PostPresenter(FetchPostsFromServiceInteractor fetchPostsFromServiceInteractor, Realm db, FetchPostsInteractor fetchPostsInteractor) {
+    public PostPresenter(FetchPostsFromServiceInteractor fetchPostsFromServiceInteractor,
+                         FetchPostsInteractor fetchPostsInteractor,
+                         DeletePostByIdInteractor deletePostByIdInteractor) {
         this.postsFromServiceInteractor = fetchPostsFromServiceInteractor;
         this.fetchPostsInteractor = fetchPostsInteractor;
-        this.db = db;
+        this.deletePostByIdInteractor = deletePostByIdInteractor;
     }
 
     public FetchPostsFromServiceInteractor getPostsFromServiceInteractor() {
@@ -45,5 +47,9 @@ public class PostPresenter extends BasePresenter<PostFragment> {
         } else {
             view.setPostsFromDataBase(posts);
         }
+    }
+
+    public void deletePostById(int postId) {
+        deletePostByIdInteractor.execute(postId);
     }
 }

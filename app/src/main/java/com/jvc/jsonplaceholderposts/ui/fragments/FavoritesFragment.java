@@ -109,6 +109,11 @@ public class FavoritesFragment extends Fragment implements FavoritesViewInterfac
         userActionInterface.postSelected(postId);
     }
 
+    @Override
+    public void userDeleteSwipe(int postId) {
+        //Nothing to do.
+    }
+
     public void updateUi() {
         postListAdapter.notifyDataSetChanged();
     }

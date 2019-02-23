@@ -45,6 +45,14 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostLi
         return posts.size();
     }
 
+    public void deleteItem(int position) {
+        userIteractionsInterface.userDeleteSwipe(position);
+    }
+
+    public int getPostIdSelected(int position) {
+        return posts.get(position).getId();
+    }
+
     public class PostListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final View readIndicatorView;
         private final TextView postTitleText;

@@ -7,4 +7,6 @@ package com.jvc.jsonplaceholderposts.ui.interfaces;
 public interface UserIteractionsInterface {
 
     void userClick(int postId);
+
+    void userDeleteSwipe(int position);
 }
