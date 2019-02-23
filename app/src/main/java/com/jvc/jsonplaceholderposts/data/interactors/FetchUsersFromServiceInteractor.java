@@ -27,9 +27,7 @@ public class FetchUsersFromServiceInteractor {
     }
 
     /**
-     * Gets and saves on the database the post getting from the service.
-     *
-     * @return List of posts.
+     * Gets and saves on the database the users getting from the service.
      */
     public void execute() {
         if (db.where(User.class).count() == 0) {

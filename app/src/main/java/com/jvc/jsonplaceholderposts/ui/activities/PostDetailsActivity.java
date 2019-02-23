@@ -1,8 +1,6 @@
 package com.jvc.jsonplaceholderposts.ui.activities;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,13 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import com.jvc.jsonplaceholderposts.BaseApplication;
 import com.jvc.jsonplaceholderposts.R;
 import com.jvc.jsonplaceholderposts.data.model.Comment;
-import com.jvc.jsonplaceholderposts.ui.BaseView;
 import com.jvc.jsonplaceholderposts.ui.Presenters.PostDetailsPresenter;
 import com.jvc.jsonplaceholderposts.ui.adapters.CommentListAdapter;
 import com.jvc.jsonplaceholderposts.ui.decorators.Decoration;

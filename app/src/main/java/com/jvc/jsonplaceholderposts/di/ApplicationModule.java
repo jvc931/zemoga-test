@@ -35,7 +35,7 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    Realm provideRealmDb(){
+    Realm provideRealmDb() {
         return Realm.getDefaultInstance();
     }
 }

@@ -1,14 +1,12 @@
 package com.jvc.jsonplaceholderposts.ui.Presenters;
 
 import com.jvc.jsonplaceholderposts.data.interactors.FetchFavoritePostsInteractor;
-import com.jvc.jsonplaceholderposts.data.model.Post;
 import com.jvc.jsonplaceholderposts.ui.fragments.FavoritesFragment;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
 
 /**
  * Presenter of the {@link FavoritesFragment}.

@@ -18,6 +18,11 @@ public class SetPostReadInteractor {
         this.db = db;
     }
 
+    /**
+     * Set the post as read.
+     *
+     * @param post post to modify.
+     */
     public void execute(Post post) {
         db.beginTransaction();
         post.setRead(true);

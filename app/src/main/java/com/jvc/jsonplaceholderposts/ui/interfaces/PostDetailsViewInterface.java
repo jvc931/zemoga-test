@@ -3,10 +3,12 @@ package com.jvc.jsonplaceholderposts.ui.interfaces;
 
 import com.jvc.jsonplaceholderposts.data.model.Comment;
 import com.jvc.jsonplaceholderposts.ui.BaseView;
+import com.jvc.jsonplaceholderposts.ui.Presenters.PostPresenter;
 
 import java.util.List;
 
 /**
+ * View contract that expose the methods that the {@link PostPresenter} can use.
  * Created by Jonathan Vargas on 22/02/2019.
  */
 public interface PostDetailsViewInterface extends BaseView {

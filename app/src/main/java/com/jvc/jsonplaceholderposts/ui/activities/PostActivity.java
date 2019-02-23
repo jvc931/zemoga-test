@@ -69,7 +69,7 @@ public class PostActivity extends AppCompatActivity implements BaseView, UserAct
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
 
-        FloatingActionButton deletePostsButton =  findViewById(R.id.floating_button_delete_posts);
+        FloatingActionButton deletePostsButton = findViewById(R.id.floating_button_delete_posts);
         deletePostsButton.setOnClickListener(view -> {
             presenter.deleteAllPost();
             postFragment.updateUi();
@@ -108,15 +108,15 @@ public class PostActivity extends AppCompatActivity implements BaseView, UserAct
 
         @Override
         public Fragment getItem(int position) {
-           switch (position){
-               case 1:
-                   favoritesFragment = FavoritesFragment.newInstance();
-                   return favoritesFragment;
-               case 0:
-               default:
-                   postFragment = PostFragment.newInstance();
-                   return postFragment;
-           }
+            switch (position) {
+                case 1:
+                    favoritesFragment = FavoritesFragment.newInstance();
+                    return favoritesFragment;
+                case 0:
+                default:
+                    postFragment = PostFragment.newInstance();
+                    return postFragment;
+            }
         }
 
         @Override

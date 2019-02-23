@@ -1,7 +1,6 @@
 package com.jvc.jsonplaceholderposts.ui.fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,7 +15,6 @@ import android.view.ViewGroup;
 import com.jvc.jsonplaceholderposts.BaseApplication;
 import com.jvc.jsonplaceholderposts.R;
 import com.jvc.jsonplaceholderposts.data.model.Post;
-import com.jvc.jsonplaceholderposts.ui.BaseView;
 import com.jvc.jsonplaceholderposts.ui.Presenters.FavoritesPresenter;
 import com.jvc.jsonplaceholderposts.ui.adapters.PostListAdapter;
 import com.jvc.jsonplaceholderposts.ui.decorators.Decoration;
@@ -60,7 +58,7 @@ public class FavoritesFragment extends Fragment implements FavoritesViewInterfac
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ((BaseApplication)getActivity().getApplication()).getApplicationComponent().inject(this);
+        ((BaseApplication) getActivity().getApplication()).getApplicationComponent().inject(this);
         return inflater.inflate(R.layout.fragment_favorites, container, false);
     }
 
@@ -111,7 +109,7 @@ public class FavoritesFragment extends Fragment implements FavoritesViewInterfac
         userActionInterface.postSelected(postId);
     }
 
-    public void updateUi(){
+    public void updateUi() {
         postListAdapter.notifyDataSetChanged();
     }
 }

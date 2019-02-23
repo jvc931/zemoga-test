@@ -15,6 +15,7 @@ import com.jvc.jsonplaceholderposts.ui.interfaces.UserIteractionsInterface;
 import java.util.List;
 
 /**
+ * Adapter to manage the posts list.
  * Created by Jonathan Vargas on 21/02/2019.
  */
 public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostListViewHolder> {
@@ -23,7 +24,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostLi
     private UserIteractionsInterface userIteractionsInterface;
     private static final int FIRST_UNREAD_POSTS = 20;
 
-    public PostListAdapter(List<Post> posts, UserIteractionsInterface userIteractionsInterface){
+    public PostListAdapter(List<Post> posts, UserIteractionsInterface userIteractionsInterface) {
         this.posts = posts;
         this.userIteractionsInterface = userIteractionsInterface;
     }
@@ -58,9 +59,9 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostLi
             itemView.setOnClickListener(this);
         }
 
-        public void blindPostData(Post post){
+        public void blindPostData(Post post) {
             this.post = post;
-            if (post.isRead() || post.getId() > FIRST_UNREAD_POSTS){
+            if (post.isRead() || post.getId() > FIRST_UNREAD_POSTS) {
                 readIndicatorView.setBackgroundResource(R.drawable.circle_shape_without_background);
             } else {
                 readIndicatorView.setBackgroundResource(R.drawable.circle_shape_with_background);

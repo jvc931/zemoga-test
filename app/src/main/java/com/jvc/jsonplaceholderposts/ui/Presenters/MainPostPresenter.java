@@ -3,13 +3,10 @@ package com.jvc.jsonplaceholderposts.ui.Presenters;
 import com.jvc.jsonplaceholderposts.data.interactors.DeletePostInteractor;
 import com.jvc.jsonplaceholderposts.data.interactors.FetchCommentsFromServiceInteractor;
 import com.jvc.jsonplaceholderposts.data.interactors.FetchUsersFromServiceInteractor;
-import com.jvc.jsonplaceholderposts.data.model.User;
 import com.jvc.jsonplaceholderposts.ui.activities.PostActivity;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
-import io.realm.Realm;
 
 /**
  * Presenter for the {@link PostActivity}.

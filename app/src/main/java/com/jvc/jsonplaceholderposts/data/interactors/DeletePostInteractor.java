@@ -18,6 +18,9 @@ public class DeletePostInteractor {
         this.db = db;
     }
 
+    /**
+     * Delete all post from the database.
+     */
     public void execute() {
         db.beginTransaction();
         db.delete(Post.class);

@@ -4,6 +4,7 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 /**
+ * Database model for the posts.
  * Created by Jonathan Vargas on 21/02/2019.
  */
 public class Post extends RealmObject {

@@ -50,7 +50,7 @@ public class PostDetailsPresenter extends BasePresenter<PostDetailsActivity> {
         super.attachView(view);
     }
 
-    private void setUi(){
+    private void setUi() {
         post = fetchPostByIdInteractor.execute(postId);
         User user = fetchUserByIdInteractor.execute(post.getUserId());
         view.setPostDescription(post.getBody());
@@ -62,13 +62,13 @@ public class PostDetailsPresenter extends BasePresenter<PostDetailsActivity> {
         view.setCommentList(fetchCommentsByPostIdInteractor.execute(postId));
     }
 
-    private void updatePostAsRead(){
-        if (!post.isRead()){
+    private void updatePostAsRead() {
+        if (!post.isRead()) {
             setPostReadInteractor.execute(post);
         }
     }
 
-    public void updatePostAsFavorite(){
+    public void updatePostAsFavorite() {
         if (!post.isFavorite()) {
             setPostAsFavoriteInteractor.execute(post);
         }

@@ -12,13 +12,14 @@ import com.jvc.jsonplaceholderposts.data.model.Comment;
 import java.util.List;
 
 /**
+ * Adapter to manage the comments list.
  * Created by Jonathan Vargas on 23/02/2019.
  */
 public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.CommentListViewHolder> {
 
     private List<Comment> comments;
 
-    public CommentListAdapter(List<Comment> comments){
+    public CommentListAdapter(List<Comment> comments) {
         this.comments = comments;
     }
 
@@ -47,7 +48,7 @@ public class CommentListAdapter extends RecyclerView.Adapter<CommentListAdapter.
             commentText = itemView.findViewById(R.id.textview_comment_list_text);
         }
 
-        public void blindPostData(Comment comment){
+        public void blindPostData(Comment comment) {
             this.comment = comment;
             commentText.setText(comment.getBody());
         }

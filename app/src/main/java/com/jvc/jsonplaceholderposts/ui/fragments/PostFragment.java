@@ -58,7 +58,8 @@ public class PostFragment extends Fragment implements PostViewInterface, UserIte
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ((BaseApplication) getActivity().getApplication()).getApplicationComponent().inject(this);;
+        ((BaseApplication) getActivity().getApplication()).getApplicationComponent().inject(this);
+        ;
         return inflater.inflate(R.layout.fragment_post, container, false);
     }
 
@@ -100,8 +101,8 @@ public class PostFragment extends Fragment implements PostViewInterface, UserIte
 
     @Override
     public void setPostsFromService() {
-        presenter.getPostsFromServiceInteractor().execute().observe(this, posts ->{
-            if (posts != null){
+        presenter.getPostsFromServiceInteractor().execute().observe(this, posts -> {
+            if (posts != null) {
                 setPostListAdapter(posts);
             }
         });
@@ -117,12 +118,12 @@ public class PostFragment extends Fragment implements PostViewInterface, UserIte
         userActionInterface.postSelected(postId);
     }
 
-    private void setPostListAdapter(List<Post> posts){
+    private void setPostListAdapter(List<Post> posts) {
         postListAdapter = new PostListAdapter(posts, this);
         postListRecycler.setAdapter(postListAdapter);
     }
 
-    public void updateUi(){
+    public void updateUi() {
         postListAdapter.notifyDataSetChanged();
     }
 }

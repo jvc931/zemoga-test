@@ -2,7 +2,6 @@ package com.jvc.jsonplaceholderposts.ui.Presenters;
 
 import com.jvc.jsonplaceholderposts.data.interactors.FetchPostsFromServiceInteractor;
 import com.jvc.jsonplaceholderposts.data.interactors.FetchPostsInteractor;
-import com.jvc.jsonplaceholderposts.data.model.Post;
 import com.jvc.jsonplaceholderposts.ui.fragments.PostFragment;
 
 import javax.inject.Inject;
@@ -39,9 +38,9 @@ public class PostPresenter extends BasePresenter<PostFragment> {
         setPostList();
     }
 
-    private void setPostList(){
+    private void setPostList() {
         RealmResults posts = fetchPostsInteractor.execute();
-        if(posts.isEmpty()){
+        if (posts.isEmpty()) {
             view.setPostsFromService();
         } else {
             view.setPostsFromDataBase(posts);

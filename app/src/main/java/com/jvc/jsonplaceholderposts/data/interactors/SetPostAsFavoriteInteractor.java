@@ -18,6 +18,11 @@ public class SetPostAsFavoriteInteractor {
         this.db = db;
     }
 
+    /**
+     * Set the post selected as favorite.
+     *
+     * @param post post to modify.
+     */
     public void execute(Post post) {
         db.beginTransaction();
         post.setFavorite(true);

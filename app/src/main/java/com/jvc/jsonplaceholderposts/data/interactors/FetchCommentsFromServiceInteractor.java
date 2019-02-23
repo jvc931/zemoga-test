@@ -28,8 +28,6 @@ public class FetchCommentsFromServiceInteractor {
 
     /**
      * Gets and saves on the database the comments getting from the service.
-     *
-     * @return List of comments.
      */
     public void execute() {
         if (db.where(Comment.class).count() == 0) {

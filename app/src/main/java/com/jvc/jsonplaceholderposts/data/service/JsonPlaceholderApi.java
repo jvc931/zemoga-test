@@ -10,6 +10,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 /**
+ * Contains all the webservice calls.
  * Created by Jonathan Vargas on 21/02/2019.
  */
 public interface JsonPlaceholderApi {
